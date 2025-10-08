@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct Search: View {
+    @EnvironmentObject var taskData: TaskData
     @State private var searchWord: String = ""
-    @State private var searchResults: [(folderName: String, task: ToDoItem)] = []
-    @Binding var folderLists: [TaskFolder]
+    @State private var searchResults: [(folderIndex: Int, item: ToDoItem)] = []
     
     var body: some View{
         NavigationStack{
             VStack(spacing: 0){
-                Text("タスク検索")
+                Text("検索")
                     .font(.system(size: 30, weight: .bold, design: .default))
                     .padding(.vertical, 20)
                 
@@ -24,20 +24,30 @@ struct Search: View {
                         .textFieldStyle(.roundedBorder)
                     Button(action: {
                         UIApplication.shared.endEditing()
-                                                searchResults = []
-                                                guard !searchWord.isEmpty else { return }
+                        searchResults = []
+                        guard !searchWord.isEmpty else { return }
 
-                        for folder in folderLists {
-                            for task in folder.tasks {
-                                if task.task.contains(searchWord) {
-                                    searchResults.append((folder.name, task))
+                        for (fidx,folder) in taskData.folders.enumerated() {
+                            if folder.name.contains(searchWord) {
+                                for item in folder.tasks {
+                                    searchResults.append((folderIndex: fidx, item: item))
+                                }
+                            } else {
+                                for item in folder.tasks {
+                                    if item.task.contains(searchWord) {
+                                        searchResults.append((folderIndex: fidx, item: item))
+                                    }
                                 }
                             }
                         }
                         searchWord = ""
                     }){
                         Text("検索")
-                            .foregroundColor(.blue)
+                            .font(.system(size: 15, design: .default))
+                            .foregroundColor(.black)
+                            .padding(.all, 6)
+                            .background(Color(UIColor(red: 147/255, green: 198/255, blue: 217/255, alpha: 0.5)))
+                            .cornerRadius(2)
                     }
                 }
                 .padding(.all, 16)
@@ -52,23 +62,25 @@ struct Search: View {
                                 .font(.system(size: 20))
                                 .foregroundColor(.gray)
                         } else {
-                            ForEach(searchResults.indices, id: \.self) { index in
-                                let result = searchResults[index]
-                                VStack(alignment: .leading, spacing: 4) {
-                                    Text("フォルダ: \(result.folderName)")
-                                        .font(.headline)
-                                    Text("タスク: \(result.task.task)")
-                                        .foregroundColor(.black)
-                                        .strikethrough(result.task.isChecked)
+                            ForEach(Array(searchResults.enumerated()), id: \.offset) { pair in
+                                let res = pair.element
+                                NavigationLink(destination: TodoList(folderIndex: res.folderIndex).environmentObject(taskData)) {
+                                    VStack(alignment: .leading) {
+                                        Text("フォルダ: \(taskData.folders[res.folderIndex].name)")
+                                            .font(.headline)
+                                        Text("タスク: \(res.item.task)")
+                                            .foregroundColor(.black)
+                                            .strikethrough(res.item.isChecked)
+                                    }
+                                    .padding()
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .background(Color.white)
+                                    .cornerRadius(8)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 8)
+                                            .stroke(Color.gray.opacity(0.3), lineWidth: 1)
+                                    )
                                 }
-                                .padding()
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .background(Color.white)
-                                .cornerRadius(8)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 8)
-                                        .stroke(Color.gray.opacity(0.3), lineWidth: 1)
-                                )
                             }
                         }
                     }
@@ -78,7 +90,8 @@ struct Search: View {
                     UIApplication.shared.endEditing()
                 }
                 
-                BottomTabBar(folderLists: $folderLists)
+                BottomTabBar()
+                    .environmentObject(taskData)
             }
             //キーボードで押し上げられないようにする
             .ignoresSafeArea(.keyboard)
@@ -86,9 +99,3 @@ struct Search: View {
         .navigationBarHidden(true)
     }
 }
-
-#Preview {
-    @Previewable @State var dummyFolders = [TaskFolder(name: "プレビュー", tasks: [])]
-    return TodoListFolder(folderLists: $dummyFolders)
-}
-

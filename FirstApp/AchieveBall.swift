@@ -5,38 +5,67 @@
 //  Created by 千田明香里 on 2025/05/29.
 //
 
+import SwiftUI
 import SpriteKit
 
-class AchieveBall: SKScene {
-    var ballCount: Int = 0
-
-    override func didMove(to view: SKView) {
-        physicsBody = SKPhysicsBody(edgeLoopFrom: frame)
-
-        for _ in 0..<ballCount {
-            addBall()
+struct AchieveBall: View {
+    let ballCount: Int
+    @State private var scene: AchieveBallScene?
+    @State private var previousBallCount: Int = -1
+    @State private var sceneKey: String = ""
+    
+    var body: some View {
+        GeometryReader { geometry in
+            ZStack {
+                RoundedRectangle(cornerRadius: 16)
+                    .fill(Color.white)
+                    .shadow(color: .gray.opacity(0.3), radius: 5, x: 0, y: 2)
+                
+                if let scene = scene {
+                    SpriteView(scene: scene)
+                        .frame(width: geometry.size.width, height: geometry.size.height)
+                        .clipShape(RoundedRectangle(cornerRadius: 16))
+                        .id(sceneKey)
+                } else {
+                    VStack {
+                        ProgressView()
+                            .scaleEffect(1.5)
+                        Text("準備中...")
+                            .font(.caption)
+                            .foregroundColor(.gray)
+                            .padding(.top, 8)
+                    }
+                }
+            }
+        }
+        .onAppear {
+            setupScene()
+        }
+        .onChange(of: ballCount) { newValue in
+            if newValue != previousBallCount {
+                setupScene()
+            }
         }
     }
-
-    func addBall() {
-        let ball = SKShapeNode(circleOfRadius: 20)
-        ball.fillColor = .random
-        ball.strokeColor = .clear
-        ball.position = CGPoint(x: CGFloat.random(in: 30...(size.width - 30)), y: size.height - 30)
-        ball.physicsBody = SKPhysicsBody(circleOfRadius: 20)
-        ball.physicsBody?.restitution = 0.7
-        ball.physicsBody?.friction = 0.2
-        addChild(ball)
+    
+    private func setupScene() {
+        if let oldScene = scene {
+            oldScene.removeAllActions()
+            oldScene.removeAllChildren()
+            oldScene.physicsWorld.speed = 0
+            oldScene.isPaused = true
+        }
+        
+        let sceneSize = CGSize(width: 350, height: 350)
+        let newScene = AchieveBallScene(size: sceneSize, ballCount: ballCount)
+        scene = newScene
+        previousBallCount = ballCount
+        sceneKey = UUID().uuidString
     }
 }
 
-extension SKColor {
-    static var random: SKColor {
-        return SKColor(
-            red: CGFloat.random(in: 0.3...1),
-            green: CGFloat.random(in: 0.3...1),
-            blue: CGFloat.random(in: 0.3...1),
-            alpha: 1.0
-        )
-    }
+#Preview {
+    AchieveBall(ballCount: 5)
+        .frame(height: 350)
+        .padding()
 }

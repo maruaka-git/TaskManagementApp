@@ -7,15 +7,22 @@
 
 import SwiftUI
 
-struct ToDoItem{
-    var isChecked: Bool
-    var task: String
-}
-
 struct TodoList: View {
-    @Binding var folder: TaskFolder
-    @Binding var folderLists: [TaskFolder]
+    @EnvironmentObject var taskData: TaskData
+    let folderIndex: Int
     @State private var newTask: String = ""
+    
+    private var folder: TaskFolder {
+        taskData.folders[folderIndex]
+    }
+    
+    private var sortedTasks: [(offset: Int, element: ToDoItem)] {
+        taskData.folders[folderIndex].tasks.enumerated()
+            .sorted { lhs, rhs in
+                // 未完了(true)が先に来る
+                (!lhs.element.isChecked && rhs.element.isChecked)
+            }
+    }
     
     var body: some View{
         VStack(spacing: 0){
@@ -26,14 +33,17 @@ struct TodoList: View {
             HStack{
                 TextField("タスクを入力してください",text: $newTask)
                     .textFieldStyle(.roundedBorder)
-                Button("追加", action: {
-                    if !newTask.isEmpty{
-                        folder.tasks.append(
-                            ToDoItem(isChecked: false, task: newTask)
-                        )
-                        newTask=""
-                    }
-                })
+                Button("追加") {
+                    let trimmed = newTask.trimmingCharacters(in: .whitespaces)
+                    guard !trimmed.isEmpty else { return }
+                    taskData.folders[folderIndex].tasks.append(ToDoItem(isChecked: false, task: trimmed))
+                    newTask=""
+                }
+                .font(.system(size: 15, design: .default))
+                .foregroundColor(.black)
+                .padding(.all, 6)
+                .background(Color(UIColor(red: 147/255, green: 198/255, blue: 217/255, alpha: 0.5)))
+                .cornerRadius(2)
             }
             .padding(.all, 16)
             .background(Color(UIColor.systemBackground))
@@ -42,19 +52,20 @@ struct TodoList: View {
             
             ScrollView{
                 LazyVStack(alignment: .leading, spacing: 8){
-                    ForEach(folder.tasks.indices, id: \.self) { index in
+                    ForEach(sortedTasks, id: \.element.id) { (offset, element) in
+                        let index = offset
                         HStack{
                             Button(action: {
-                                folder.tasks[index].isChecked.toggle()
-                            }, label : {
+                                taskData.folders[folderIndex].tasks[index].isChecked.toggle()
+                            }) {
                                 Image(systemName:
                                         folder.tasks[index].isChecked ? "checkmark.square.fill" : "square"
                                 )
                                 .imageScale(.large)
-                                .foregroundStyle(.pink)
-                            })
-                            Text(folder.tasks[index].task)
-                                .strikethrough(folder.tasks[index].isChecked)
+                                .foregroundStyle(.blue)
+                            }
+                            Text(element.task)
+                                .strikethrough(element.isChecked)
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
                     }
@@ -68,34 +79,11 @@ struct TodoList: View {
                 UIApplication.shared.endEditing()
             }
             
-            BottomTabBar(folderLists: $folderLists)
+            BottomTabBar()
+                .environmentObject(taskData)
         }
         //キーボードで押し上げられないようにする
         .ignoresSafeArea(.keyboard)
         .navigationBarHidden(true)
-    }
-}
-
-struct TodoList_Previews: PreviewProvider {
-    @State static var dummyFolder = TaskFolder(
-        name: "プレビューフォルダ",
-        tasks: [
-            ToDoItem(isChecked: false, task: "サンプル1"),
-            ToDoItem(isChecked: true, task: "サンプル2")
-        ]
-    )
-    
-    @State static var dummyFolderLists = [
-        TaskFolder(
-            name: "プレビュー用フォルダ",
-            tasks: [
-                ToDoItem(isChecked: false, task: "サンプル1"),
-                ToDoItem(isChecked: true, task: "サンプル2")
-            ]
-        )
-    ]
-
-    static var previews: some View {
-        TodoList(folder: $dummyFolder, folderLists: $dummyFolderLists)
     }
 }

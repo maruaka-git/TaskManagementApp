@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct BottomTabBar: View{
-    @Binding var folderLists: [TaskFolder]
+    @EnvironmentObject var taskData: TaskData
     
     var body: some View{
         HStack{
             Spacer()
             // フォルダ一覧
-            NavigationLink(destination: TodoListFolder(folderLists: $folderLists))
+            NavigationLink(destination: TodoListFolder().environmentObject(taskData))
             {
                 Image(systemName: "pencil.and.list.clipboard")
                     .resizable()
@@ -24,7 +24,7 @@ struct BottomTabBar: View{
             }
             Spacer()
             // 検索
-            NavigationLink(destination: Search(folderLists: $folderLists))
+            NavigationLink(destination: Search().environmentObject(taskData))
             {
                 Image(systemName: "magnifyingglass.circle")
                     .resizable()
@@ -34,19 +34,9 @@ struct BottomTabBar: View{
             }
             Spacer()
             // 達成率
-            NavigationLink(destination: Achievement(folderLists: $folderLists))
+            NavigationLink(destination: Achievement().environmentObject(taskData))
             {
                 Image(systemName: "crown")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 40)
-                    .foregroundColor(.black)
-            }
-            Spacer()
-            // 設定
-            NavigationLink(destination: Setting(folderLists: $folderLists))
-            {
-                Image(systemName: "gearshape.fill")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 40)

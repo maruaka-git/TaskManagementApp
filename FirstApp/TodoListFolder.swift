@@ -14,8 +14,9 @@ extension UIApplication{
 }
 
 struct TodoListFolder: View {
+    @EnvironmentObject var taskData: TaskData
     @State private var folderName: String = ""
-    @Binding var folderLists: [TaskFolder]
+    
     
     var body: some View{
         NavigationStack{
@@ -27,16 +28,18 @@ struct TodoListFolder: View {
                 HStack{
                     TextField("タスクを入力してください",text: $folderName)
                         .textFieldStyle(.roundedBorder)
-                    Button(action: {
-                        if !folderName.isEmpty{
-                            folderLists.append(
-                                TaskFolder(name: folderName, tasks: [])
-                            )
+                    Button{
+                        if !folderName.trimmingCharacters(in: .whitespaces).isEmpty {
+                            taskData.folders.append(TaskFolder(name: folderName, tasks: []))
+                            folderName = ""
                         }
-                        folderName=""
-                    }){
+                    } label: {
                         Text("追加")
-                            .foregroundColor(.blue)
+                            .font(.system(size: 15, design: .default))
+                            .foregroundColor(.black)
+                            .padding(.all, 6)
+                            .background(Color(UIColor(red: 147/255, green: 198/255, blue: 217/255, alpha: 0.5)))
+                            .cornerRadius(2)
                     }
                 }
                 .padding(.all, 16)
@@ -46,9 +49,9 @@ struct TodoListFolder: View {
                 
                 ScrollView{
                     LazyVStack(alignment: .leading, spacing: 8){
-                        ForEach(folderLists.indices, id: \.self) { index in
-                            NavigationLink(destination: TodoList(folder: $folderLists[index], folderLists: $folderLists)) {
-                                    FolderView(name: folderLists[index].name)
+                        ForEach(taskData.folders.indices, id: \.self) { index in
+                            NavigationLink(destination: TodoList(folderIndex: index).environmentObject(taskData)){
+                                FolderView(name: taskData.folders[index].name)
                                     .cornerRadius(6)
                                     .shadow(radius: 2)
                                 }
@@ -60,7 +63,8 @@ struct TodoListFolder: View {
                     UIApplication.shared.endEditing()
                 }
                 
-                BottomTabBar(folderLists: $folderLists)
+                BottomTabBar()
+                    .environmentObject(taskData)
             }
             //キーボードで押し上げられないようにする
             .ignoresSafeArea(.keyboard)
@@ -84,10 +88,4 @@ struct FolderView: View {
             .cornerRadius(6)
             .shadow(radius: 2)
     }
-}
-
-
-#Preview {
-    @Previewable @State var dummyFolders = [TaskFolder(name: "プレビュー", tasks: [])]
-    return TodoListFolder(folderLists: $dummyFolders)
 }

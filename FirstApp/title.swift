@@ -7,14 +7,8 @@
 
 import SwiftUI
 
-struct TaskFolder: Identifiable{
-    let id = UUID()
-    var name: String
-    var tasks: [ToDoItem]
-}
-
 struct Title: View {
-    @State private var folders:[TaskFolder] = []
+    @EnvironmentObject var taskData: TaskData
     @State private var navigate = false
     
     var body: some View{
@@ -35,7 +29,7 @@ struct Title: View {
                         .foregroundColor(.gray)
                         .padding(.top, 10)
                 }
-                NavigationLink(destination: TodoListFolder(folderLists: $folders), isActive: $navigate){
+                NavigationLink(destination: TodoListFolder().environmentObject(taskData), isActive: $navigate){
                     EmptyView()
                 }.hidden()
                 Color.clear.contentShape(Rectangle()).onTapGesture {
@@ -48,4 +42,5 @@ struct Title: View {
 
 #Preview{
     Title()
+        .environmentObject(TaskData())
 }

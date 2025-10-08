@@ -17,8 +17,6 @@ struct Setting: View {
                     .font(.system(size: 30, weight: .bold, design: .default))
                     .padding(.vertical, 20)
                 
-                Divider()
-                
                 ScrollView{
                     VStack(spacing: 0){
                         NavigationLink(destination: ThemeColor()){
