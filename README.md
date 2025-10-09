@@ -51,21 +51,51 @@ Swiftの勉強目的で制作し、シンプルで日常的に使いやすいア
     <tr>
         <td align="center">
             <strong>タイトル画面</strong><br>
-            <img src="https://github.com/user-attachments/assets/d3456b09-12ac-4256-9151-991d45cb787b" width="90%" />
+            <img src="https://github.com/user-attachments/assets/288f65d9-62a9-4a95-ad73-420b73d23ce6" width="90%" />
         </td>
         <td align="center">
-            <strong>利用登録画面</strong><br>
-            <img src="https://github.com/user-attachments/assets/e992b3d8-ee4b-4e0c-9ee4-b5dd1a63418d" width="90%" />
+            <strong>フォルダ一覧画面</strong><br>
+            <img src="https://github.com/user-attachments/assets/ef8d0c63-cea1-4ac3-bf43-6d163ba83245" width="90%" />
         </td> 
     </tr>
     <tr>
         <td align="center">
-            <strong>新規登録画面</strong><br>
-            <img src="https://github.com/user-attachments/assets/b288efc9-476e-4def-902c-cc2e8b0998d7" width="90%" />
+            <strong>タスク一覧画面</strong><br>
+            <img src="https://github.com/user-attachments/assets/62a52225-f521-4a1e-a529-0f1a1125c54f" width="90%" />
+        </td> 
+        <td align="center">
+            <strong>フォルダ、タスクの登録</strong><br>
+            <img src="https://github.com/maruaka-git/TaskManagementApp/issues/3#issue-3498317295" width="90%" />
+        </td>
+    </tr>
+    <tr>
+        <td align="center">
+            <strong>タスクの達成</strong><br>
+            <img src="https://github.com/user-attachments/assets/37539ccd-1d3d-419b-9d3f-62833ae0cd16" width="90%" />
         </td>
         <td align="center">
-            <strong>ログイン画面</strong><br>
-            <img src="https://github.com/user-attachments/assets/4a7f37df-34bf-4553-b6d3-c89b5deb827c" width="90%" />
+            <strong>検索画面</strong><br>
+            <img src="https://github.com/user-attachments/assets/d9cb115c-7596-4a14-8bff-0d9d5af403ab" width="90%" />
+        </td>
+    </tr>
+    <tr>
+        <td align="center">
+            <strong>タスクの検索</strong><br>
+            <img src="https://github.com/user-attachments/assets/3f6fb2b7-a915-4c3d-a63d-1300ce4a5978" width="90%" />
+        </td>
+        <td align="center">
+            <strong>業績画面</strong><br>
+            <img src="https://github.com/user-attachments/assets/17e76c5c-77ac-426d-81f7-06c2156160c1" width="90%" />
+        </td>
+    </tr>
+    <tr>
+        <td align="center">
+            <strong>達成タスク数に応じた数のボールが落ちてくる</strong><br>
+            <img src="https://github.com/user-attachments/assets/ff1544f3-a614-44c7-8e95-8a31711feee7" width="90%" />
+        </td>
+        <td align="center">
+            <strong></strong><br>
+            <img src="" width="90%" />
         </td>
     </tr>
 </table>
@@ -77,7 +107,26 @@ Swiftの勉強目的で制作し、シンプルで日常的に使いやすいア
 ```plaintext
 
 FirstApp/
+├── Assets.xcassets/
+├── Preview Content/
+├── FirstApp.xcdatamodeld
+├── FirstAppApp.swift
+├── ContentView.swift
 │
+├── Models/
+│   ├── TaskData.swift
+│   └── Models.swift
+├── Views/
+│   ├── AchieveBall.swift
+│   ├── AchieveBallScene.swift
+│   ├── Achievement.swift
+│   ├── BottomTabBar.swift
+│   ├── Search.swift
+│   ├── Title.swift
+│   ├── TodoList.swift
+│   └── TodoListFolder.swift
+└── Persistence/
+    └── Persistence.swift
 
 ```
 
