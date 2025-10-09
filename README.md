@@ -65,7 +65,7 @@ Swiftの勉強目的で制作し、シンプルで日常的に使いやすいア
         </td> 
         <td align="center">
             <strong>フォルダ、タスクの登録</strong><br>
-            <img src="https://github.com/maruaka-git/TaskManagementApp/issues/3#issue-3498317295" width="90%" />
+            <img src="https://github.com/user-attachments/assets/1f30401b-6b2c-4ff1-bb1a-da712c8576e1" width="90%" />
         </td>
     </tr>
     <tr>
