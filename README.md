@@ -74,9 +74,12 @@ Swiftの勉強目的で制作し、シンプルで日常的に使いやすいア
 
 ## フォルダ構成
 
-plaintext
+```plaintext
+
 FirstApp/
 │
+
+```
 
 ---
 
