@@ -1,25 +1,25 @@
 # タスク管理アプリ
 
-## 概要
+<h2>
+  <img src="https://github.com/user-attachments/assets/579b2b99-6338-426f-82c1-8b8e98a7cbdc" alt="alt text" style="height: 1em; vertical-align: baseline;" />
+  概要
+</h2>
 
 『タスク管理アプリ』は、1人で約1ヶ月間かけて制作したiOSアプリです。
 Swiftの勉強目的で制作し、シンプルで日常的に使いやすいアプリを意識しました。
 
 主な特徴は以下の通りです：
-タスクをフォルダごとに管理可能
-タスクの検索が可能
-達成したタスクの数に応じて画面に変化がある業績可視化機能あり
+
+- タスクをフォルダごとに管理可能
+- タスクの検索が可能
+- 達成したタスクの数に応じて画面に変化がある業績可視化機能あり
 
 ---
 
-## 企画背景
-
-- Swiftという言語に触れたことがなかった
-- MacとiPhoneを使用している自身の環境を活かした開発がしたかった
-
----
-
-## 『タスク管理アプリ』の機能
+<h2>
+  <img src="https://github.com/user-attachments/assets/579b2b99-6338-426f-82c1-8b8e98a7cbdc" alt="alt text" style="height: 1em; vertical-align: baseline;" />
+  『タスク管理アプリ』の機能
+</h2>
 
 - タスク追加（フォルダ作成後、各フォルダにタスクを登録）
 - タスク検索
@@ -27,25 +27,36 @@ Swiftの勉強目的で制作し、シンプルで日常的に使いやすいア
 
 ---
 
- ## 工夫した点
-- 操作がわかりやすいシンプルな画面設計
-- 使いやすさを重視したUI/UX
+<h2>
+  <img src="https://github.com/user-attachments/assets/579b2b99-6338-426f-82c1-8b8e98a7cbdc" alt="alt text" style="height: 1em; vertical-align: baseline;" />
+   工夫した点
+</h2>
+
+- 操作がわかりやすいようにシンプルな画面設計に
 - 毎日使うことを想定し、余計な機能はなるべく排除
-- タスク達成時に達成感を得られるようにし、継続を支援
+- タスク完了時に達成感を得られるようにし、継続を支援
+- CoreDataを使わず、軽量なデータ管理を実現
+UserDefaults に Codable 構造体をJSON形式で保存することで、複雑なデータベースを使わずにタスクやフォルダの情報を永続化。小規模アプリに適した、シンプルで高速な保存方式を採用。
 
 ---
 
-## 使用した技術
+<h2>
+  <img src="https://github.com/user-attachments/assets/579b2b99-6338-426f-82c1-8b8e98a7cbdc" alt="alt text" style="height: 1em; vertical-align: baseline;" />
+   使用した技術
+</h2>
 
-- Swift
-- SwiftUI
-- SpriteKit
-- Foundation
-- CoreData
+| 分類 | 技術名 | 用途・役割 |
+|------|----------|-------------|
+| 言語 | Swift | アプリ全体の開発言語 |
+| フレームワーク | SwiftUI | UI構築・画面遷移の実装 |
+| フレームワーク | SpriteKit | 業績画面でのアニメーション演出 |
 
 ---
 
-## 実際のアプリ画面
+<h2>
+  <img src="https://github.com/user-attachments/assets/579b2b99-6338-426f-82c1-8b8e98a7cbdc" alt="alt text" style="height: 1em; vertical-align: baseline;" />
+   実際のアプリ画面
+</h2>
 
 <table>
     <tr>
@@ -106,7 +117,10 @@ Swiftの勉強目的で制作し、シンプルで日常的に使いやすいア
 
 ---
 
-## フォルダ構成
+<h2>
+  <img src="https://github.com/user-attachments/assets/579b2b99-6338-426f-82c1-8b8e98a7cbdc" alt="alt text" style="height: 1em; vertical-align: baseline;" />
+   フォルダ構成
+</h2>
 
 ```plaintext
 
@@ -135,7 +149,3 @@ FirstApp/
 ```
 
 ---
-
-## めも
-Jsonで保存してること
-画面レイアウト
