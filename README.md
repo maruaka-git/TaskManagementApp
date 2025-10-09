@@ -1,7 +1,7 @@
 # タスク管理アプリ
 
 <h2>
-  <img src="https://github.com/user-attachments/assets/579b2b99-6338-426f-82c1-8b8e98a7cbdc" alt="alt text" style="height: 1em; vertical-align: -0.2em;" />
+  <img src="https://github.com/user-attachments/assets/579b2b99-6338-426f-82c1-8b8e98a7cbdc" alt="alt text" style="height: 1em; vertical-align: -0.5em;" />
   概要
 </h2>
 
