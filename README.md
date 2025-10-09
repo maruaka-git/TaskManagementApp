@@ -17,7 +17,7 @@ Swiftの勉強目的で制作し、シンプルで日常的に使いやすいア
 ---
 
 <h2>
-  <img src="https://github.com/user-attachments/assets/579b2b99-6338-426f-82c1-8b8e98a7cbdc" alt="alt text" style="height: 1em; vertical-align: baseline;" />
+    <img src="https://github.com/user-attachments/assets/0175bc64-5a0e-4e61-9d58-5994af5bd421" alt="alt text" style="height: 1em; vertical-align: -1em;" />
   『タスク管理アプリ』の機能
 </h2>
 
@@ -28,7 +28,7 @@ Swiftの勉強目的で制作し、シンプルで日常的に使いやすいア
 ---
 
 <h2>
-  <img src="https://github.com/user-attachments/assets/579b2b99-6338-426f-82c1-8b8e98a7cbdc" alt="alt text" style="height: 1em; vertical-align: baseline;" />
+    <img src="https://github.com/user-attachments/assets/0175bc64-5a0e-4e61-9d58-5994af5bd421" alt="alt text" style="height: 1em; vertical-align: -1em;" />
    工夫した点
 </h2>
 
@@ -41,7 +41,7 @@ UserDefaults に Codable 構造体をJSON形式で保存することで、複雑
 ---
 
 <h2>
-  <img src="https://github.com/user-attachments/assets/579b2b99-6338-426f-82c1-8b8e98a7cbdc" alt="alt text" style="height: 1em; vertical-align: baseline;" />
+    <img src="https://github.com/user-attachments/assets/0175bc64-5a0e-4e61-9d58-5994af5bd421" alt="alt text" style="height: 1em; vertical-align: -1em;" />
    使用した技術
 </h2>
 
@@ -54,7 +54,7 @@ UserDefaults に Codable 構造体をJSON形式で保存することで、複雑
 ---
 
 <h2>
-  <img src="https://github.com/user-attachments/assets/579b2b99-6338-426f-82c1-8b8e98a7cbdc" alt="alt text" style="height: 1em; vertical-align: baseline;" />
+    <img src="https://github.com/user-attachments/assets/0175bc64-5a0e-4e61-9d58-5994af5bd421" alt="alt text" style="height: 1em; vertical-align: -1em;" />
    実際のアプリ画面
 </h2>
 
@@ -118,7 +118,7 @@ UserDefaults に Codable 構造体をJSON形式で保存することで、複雑
 ---
 
 <h2>
-  <img src="https://github.com/user-attachments/assets/579b2b99-6338-426f-82c1-8b8e98a7cbdc" alt="alt text" style="height: 1em; vertical-align: baseline;" />
+    <img src="https://github.com/user-attachments/assets/0175bc64-5a0e-4e61-9d58-5994af5bd421" alt="alt text" style="height: 1em; vertical-align: -1em;" />
    フォルダ構成
 </h2>
 
