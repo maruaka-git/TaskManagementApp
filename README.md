@@ -84,8 +84,6 @@ Swiftの勉強目的で制作し、シンプルで日常的に使いやすいア
             <strong>タスクの達成</strong><br>
             <img src="https://github.com/user-attachments/assets/37539ccd-1d3d-419b-9d3f-62833ae0cd16" width="80%" />
         </td>
-    </tr>
-    <tr>
         <td align="center">
             <strong>タスクの検索</strong><br>
             <img src="https://github.com/user-attachments/assets/3f6fb2b7-a915-4c3d-a63d-1300ce4a5978" width="80%" />
